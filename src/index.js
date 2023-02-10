@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 
 import './asserts/scss/common.scss';
 import './asserts/scss/iconfont.css';
-import './asserts/scss/button.scss'
+import './asserts/scss/button.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

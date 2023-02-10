@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import LoginForm from "./LoginForm";
+import Title from "./Title";
 import './index.scss';
 
 export default class Form extends Component {
@@ -12,6 +13,7 @@ export default class Form extends Component {
   render() {
     return (
       <div className="form-wrapper">
+        <Title />
         <LoginForm />
       </div>
     )
