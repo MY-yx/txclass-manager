@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
-import { createBrowserHistory } from 'history';
-import LoginService from '../../../../services/login';
+
+import LoginService from 'services/Login';
 
 import './index.scss';
 
-const loginService = new LoginService(),
-  history = createBrowserHistory();
+const loginService = new LoginService();
 
-export default class HeaderLogout extends Component {
-  async submitLogout() {
-    const cfm = window.confirm('确认退出登录吗?');
+export default class Logout extends Component {
+  
+  async onLogoutClick () {
+    const cfm = window.confirm('确认退出登录吗？');
 
     if (cfm) {
-      const result = await loginService.logoutAction();
+    	const result = await loginService.logoutAction();
 
-      const { error_code, error_msg } = result;
-      if (error_code === 0) {
-        alert(error_msg);
-        history.push('/Login');
-        window.location.reload();
-      }
+    	const errorCode = result.error_code;
+
+    	if (errorCode === 0) {
+    		const { history } = this.props;
+    		history.push('/login');
+    	}
     }
   }
 
-  render() {
-    return (
-      <span className='header-logout' onClick={ (e) => this.submitLogout(e)}>登出</span>
-    )
-  }
+	render () {
+		return (
+      <span 
+        className="header-logout"
+        onClick={ () => this.onLogoutClick() }>
+      安全退出</span>
+		);
+	}
 }

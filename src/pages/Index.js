@@ -1,55 +1,71 @@
-import React, { Component } from "react";
-import { createBrowserHistory } from "history";
-import LoginService from "services/login";
-import Header from "components/Index/Header";
-import SiderBar from "components/Index/SiderBar";
-import Container from "components/Index/Container";
-import { NAV } from "../config/config";
+import React, { Component } from 'react';
 
-const loginService = new LoginService(),
-  history = createBrowserHistory();
+import LoginService from 'services/Login';
+
+import Header from 'components/Index/Header';
+import SideBar from 'components/Index/SideBar';
+import Container from 'components/Index/Container';
+
+import { NAV } from 'config/config';
+
+const loginService = new LoginService();
+
 export default class IndexPage extends Component {
-  constructor(props) {
-    super(props);
+	constructor (props) {
+		super(props);
 
-    // 类似于vue里的data, 本页的数据都放这里
-    this.state = {
-      curIdx: 0,
-      field: NAV[0].field,
-      title: NAV[0].title
-    };
-  }
+		this.state = {
+			curIdx: 0,
+			field: NAV[0].field,
+			title: NAV[0].title
+		}
+	}
 
-  async loginCheck() {
+	async loginCheck () {
     const result = await loginService.loginCheck();
 
-    if (result.error_code === 10006) {
-      history.push('/Login');
+    const errorCode = result.error_code,
+          { history } = this.props;
+
+    if (errorCode === 10006) {
+    	history.push('/login');
+    	return;
     }
-  }
 
-  onNavItemClick(field, index) {
-    this.setState({
-      field,
-      curIdx: index
-    });
-  }
+    history.push('/course');
+	}
 
-  // 组件挂载时 ==== mounted
-  componentDidMount() {
-    // this.loginCheck();
-  }
+	onNavItemClick (dataItem, index) {
+    
+    const { field, title } = dataItem;
 
-  render() {
-    return (
+		this.setState({
+			field,
+			title,
+			curIdx: index
+		})
+	}
+
+	componentDidMount () {
+		this.loginCheck();
+	}
+
+	render () {
+    
+    const { children, history } = this.props,
+          { curIdx } = this.state;
+
+		return (
       <div className="container">
-        <Header history={ history } />
-        <SiderBar
-          curIdx={ this.state.curIdx }
+      	<Header history={ history } />
+      	<SideBar 
+          curIdx={ curIdx }
           onNavItemClick={ this.onNavItemClick.bind(this) }
-        />
-        <Container />
+      	/>
+      	<Container
+          children={ children }
+      	/>
       </div>
-    )
-  }
+		);
+	}
 }

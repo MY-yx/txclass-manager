@@ -1,21 +1,20 @@
-import React, { Component } from "react";
-import LoginForm from "./LoginForm";
-import Title from "./Title";
+import React, { Component } from 'react';
+
 import './index.scss';
 
+import Title from './Title';
+import LoginForm from './LoginForm';
+
 export default class Form extends Component {
-  constructor(props) {
-    super(props);
+	render () {
+    
+    const { history } = this.props;
 
-    this.state = {};
-  }
-
-  render() {
-    return (
+		return (
       <div className="form-wrapper">
         <Title />
-        <LoginForm />
+        <LoginForm history={ history } />
       </div>
-    )
-  }
+		);
+	}
 }

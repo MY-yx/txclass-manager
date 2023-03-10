@@ -1,13 +1,16 @@
-import React, { Component } from "react";
-import { Outlet } from 'react-router';
+import React, { Component } from 'react';
+
 import './index.scss';
 
 export default class Board extends Component {
-  render() {
-    return (
-      <div className="contaner-board">
-        <Outlet></Outlet>
+	render () {
+   
+    const { children } = this.props;
+
+		return (
+      <div className="page-board">
+        { children }
       </div>
-    )
-  }
+		);
+	}
 }

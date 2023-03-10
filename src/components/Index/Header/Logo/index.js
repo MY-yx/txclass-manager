@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import './index.scss';
 
 export default class HeaderLogo extends Component {
-
-  render() {
-    return (
+	render () {
+		return (
       <div className="header-logo-wrapper">
-        <a className="logo-link" href="/"></a>
+        <Link to="/course" className="logo-link"></Link>
       </div>
-    )
-  }
+		);
+	}
 }

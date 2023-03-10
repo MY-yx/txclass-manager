@@ -1,41 +1,22 @@
-import React, { Component } from "react";
-import { createBrowserHistory } from "history";
-import LoginService from "../services/login";
-import Login from "components/Login";
+import React, { Component } from 'react';
 
-const history = createBrowserHistory(),
-  loginService = new LoginService();
+import Login from 'components/Login';
 
 export default class LoginPage extends Component {
-  constructor(props) {
-    super(props);
+	constructor (props) {
+		super(props);
 
-    this.state = {};
-  }
+		this.state = {};
+	}
 
-  async loginCheck() {
-    const result = await loginService.loginCheck();
+	render () {
+    
+    const { history } = this.props;
 
-    if (result.error_code === 10007) {
-      // 登录成功
-      history.push('/');
-      window.location.reload();
-    } else {
-      alert('用户未登录');
-    }
-  }
-
-  // 组件挂载时 ==== mounted
-  componentDidMount() {
-    this.loginCheck();
-  }
-
-  render() {
-
-    return (
+		return (
       <div className="container">
-        <Login />
+        <Login history={ history } />
       </div>
-    )
-  }
+		);
+	}
 }

@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
+
 import HeaderLogo from './Logo';
 import HeaderTitle from './Title';
 import HeaderLogout from './Logout';
 
-import './index.scss'
+import './index.scss';
 
 export default class Header extends Component {
-  constructor(props) {
-    super(props);
+	render () {
 
-    this.state = {};
-  }
+    const { history } = this.props;
 
-  render() {
-    return (
-      <header className='header'>
+		return (
+      <header className="header">
         <HeaderLogo />
         <HeaderTitle />
-        <HeaderLogout />
+        <HeaderLogout history={ history } />
       </header>
-    )
-  }
+		);
+	}
 }

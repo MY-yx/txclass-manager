@@ -1,49 +1,62 @@
-import { API } from "../config/config";
-import HTTP from "../utils/http";
+import HTTP from 'utils/http';
+import { API } from '../config/config';
+
+const LOGIN = API.LOGIN;
 
 export default class LoginService extends HTTP {
-  loginAction(userInfo) {
-    return new Promise((resolve, reject) => {
+	loginAction (userInfo) {
+		return new Promise((resolve, reject) => {
       this.axiosPost({
-        url: API.LOGIN_ACTION,
-        data: userInfo,
-        success(data) {
-          resolve(data)
-        },
-        error(err) {
-          reject(err)
-        }
-      })
-    })
-  }
+      	url: LOGIN.LOGIN_ACTION,
+      	data: userInfo,
+      	success (data) {
+      		resolve(data);
+      	},
+      	error (error) {
+      		alert('网络请求失败');
+      	}
+      });
+		});
+	}
 
-  loginCheck() {
+  loginCheck () {
     return new Promise((resolve, reject) => {
       this.axiosGet({
-        url: API.LOGIN_CHECK,
-        success(data) {
+        url: LOGIN.LOGIN_CHECK,
+        success (data) {
           resolve(data);
         },
-        error(err) {
-          alert('网络请求异常');
-          reject(err);
+        error (error) {
+          alert('网络请求失败');
+          window.location.reload();
         }
-      })
-    })
+      });
+    });
   }
 
-  logoutAction() {
+  logoutAction () {
     return new Promise((resolve, reject) => {
-      this.axiosPost({
-        url: API.LOGOUT_ACTION,
-        data: {},
-        success(data) {
+      this.axiosGet({
+        url: LOGIN.LOGOUT_ACTION,
+        success (data) {
           resolve(data);
         },
-        error(err) {
-          reject(err);
+        error (error) {
+          alert('网络请求失败');
+          window.location.reload();
         }
       })
-    })
+    });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
